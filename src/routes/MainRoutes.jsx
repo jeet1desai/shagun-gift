@@ -5,6 +5,7 @@ import MainLayout from "../layouts/MainLayout";
 
 const DashboardPage = Loadable(lazy(() => import("../pages/views/Dashboard")));
 const EventsPage = Loadable(lazy(() => import("../pages/views/Events")));
+const ProfilePage = Loadable(lazy(() => import("../pages/views/Profile")));
 
 const MainRoutes = {
   element: <MainLayout />,
@@ -19,7 +20,7 @@ const MainRoutes = {
     },
     {
       path: "/profile",
-      element: <EventsPage />,
+      element: <ProfilePage />,
     },
   ],
 };
