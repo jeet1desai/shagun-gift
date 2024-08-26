@@ -3,7 +3,7 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { RiMailLine, RiLock2Line } from "react-icons/ri";
+import { RiLock2Line, RiMailLine, RiPhoneLine } from "react-icons/ri";
 
 import { StyledAuthContainer, StyledAuthHeading, StyledFooter, StyledLoginContainer } from "./AuthStyled";
 
@@ -23,8 +23,9 @@ const Login = () => {
         <Divider />
 
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ phone: "", email: "", password: "" }}
           validationSchema={Yup.object().shape({
+            phone: Yup.string().max(10).required("Please enter your phone number!"),
             email: Yup.string().email("Must be a valid email").max(255).required("Please enter your email address!"),
             password: Yup.string().max(255).required("Please enter your password!"),
           })}
@@ -35,6 +36,18 @@ const Login = () => {
           {({ errors, handleSubmit, isSubmitting, touched, getFieldProps }) => (
             <Form noValidate onSubmit={handleSubmit}>
               <Grid container spacing={4}>
+                <Grid item xs={12}>
+                  <TextInput
+                    placeholder="9632587412"
+                    fullWidth
+                    label="Phone Number"
+                    required
+                    {...getFieldProps("phone")}
+                    error={touched.phone && errors.phone}
+                    LeftIcon={RiPhoneLine}
+                    type="number"
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <TextInput
                     placeholder="hello@hello.com"

@@ -1,13 +1,13 @@
 import { lazy } from "react";
 
 import Loadable from "../components/Loadable";
-import MinimalLayout from "../layouts/MinimalLayout";
+import AuthLayout from "../layouts/AuthLayout";
 
 const LoginPage = Loadable(lazy(() => import("../pages/authentication/Login")));
 const RegisterPage = Loadable(lazy(() => import("../pages/authentication/Register")));
 
 const LoginRoutes = {
-  element: <MinimalLayout />,
+  element: <AuthLayout />,
   children: [
     {
       path: "/login",
