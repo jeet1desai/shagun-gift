@@ -4,13 +4,20 @@ import { useTheme } from "@mui/material/styles";
 import { Avatar, Box, ButtonBase, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "../../../store";
+
 const Profile = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  // if (!user) {
-  //   return null;
-  // }
+  const { loading, user } = useSelector((state) => state.user);
+
+  if (!user) {
+    return null;
+  }
+
+  console.log(user);
+  
 
   return (
     <Box
@@ -35,7 +42,9 @@ const Profile = () => {
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={""} sx={{ width: 32, height: 32 }} />
-          <Typography sx={{ textTransform: "capitalize", color: theme.palette.text.primary }} variant="h6">{`Name`}</Typography>
+          <Typography sx={{ textTransform: "capitalize", color: theme.palette.text.primary }} variant="h6">
+            {user.name}
+          </Typography>
         </Stack>
       </ButtonBase>
     </Box>

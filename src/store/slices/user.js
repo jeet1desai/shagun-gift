@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { cookieStorage } from "../../utils/cookie";
 
 const initialState = {
   loading: false,
   isLoggedIn: false,
-  user: null,
+  user: null || JSON.parse(cookieStorage.getItem("user")),
 };
 
 const userSlice = createSlice({

@@ -2,6 +2,7 @@ import { Box, List, styled, Typography, useTheme } from "@mui/material";
 
 import { useSelector } from "../../../../store";
 import NavItem from "./NavItem";
+import { useParams } from "react-router-dom";
 
 export const StyledHead = styled(Typography)(({ theme }) => ({
   padding: theme.spacing(1),
@@ -12,6 +13,7 @@ export const StyledHead = styled(Typography)(({ theme }) => ({
 
 const DrawerContent = () => {
   const theme = useTheme();
+  const { id } = useParams();
 
   const menu = useSelector((state) => state.menu);
   const { drawerOpen } = menu;
@@ -21,14 +23,14 @@ const DrawerContent = () => {
       id: "dashboard",
       title: "Dashboard",
       type: "item",
-      url: "dashboard",
+      url: `dashboard/${id}`,
       icon: null,
     },
     {
       id: "events",
       title: "Events",
       type: "item",
-      url: "events",
+      url: `events/${id}`,
       icon: null,
     },
   ].map((item) => {
