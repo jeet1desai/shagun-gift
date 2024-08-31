@@ -14,7 +14,7 @@ const LoginRoutes = {
       element: <LoginPage />,
     },
     {
-      path: "/register",
+      path: "/register/:id",
       element: <RegisterPage />,
     },
   ],
