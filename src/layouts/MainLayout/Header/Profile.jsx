@@ -13,7 +13,7 @@ const Profile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { loading, user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const sessionUser = cookieStorage.getItem("user");
   useEffect(() => {

@@ -7,7 +7,7 @@ const Palette = (mode) => {
     palette: {
       mode,
       common: { black: "#000", white: "#fff" },
-      primary: { main: "#FF0000", light: "#FDEDF0", dark: "#1565c0", contrastText },
+      primary: { main: "#FF0000", light: "#FDEDF0", dark: "#d50000", contrastText },
       secondary: { main: "#9c27b0", light: "#ba68c8", dark: "#7b1fa2", contrastText },
       error: { main: "#DF1C41", light: "#FDEDF0", dark: "#c62828", contrastText },
       warning: { main: "#ed6c02", light: "#ff9800", dark: "#e65100", contrastText },
@@ -28,6 +28,9 @@ const Palette = (mode) => {
         A200: "#eeeeee",
         A400: "#bdbdbd",
         A700: "#616161",
+      },
+      surface: {
+        700: "#20232D",
       },
       placeHolder: "#868C98",
       contrastThreshold: 3,
