@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { cookieStorage } from "../../utils/cookie";
 
 const initialState = {
   loading: false,

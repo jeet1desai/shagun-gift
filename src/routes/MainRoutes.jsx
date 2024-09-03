@@ -6,6 +6,7 @@ import MainLayout from "../layouts/MainLayout";
 const DashboardPage = Loadable(lazy(() => import("../pages/views/Dashboard")));
 const EventsPage = Loadable(lazy(() => import("../pages/views/Events")));
 const EventFormPage = Loadable(lazy(() => import("../pages/views/EventForm")));
+const EventDetailPage = Loadable(lazy(() => import("../pages/views/EventDetail")));
 const ProfilePage = Loadable(lazy(() => import("../pages/views/Profile")));
 
 const MainRoutes = {
@@ -22,6 +23,10 @@ const MainRoutes = {
     {
       path: "/events/:id/event/create",
       element: <EventFormPage />,
+    },
+    {
+      path: "/events/:id/event/:eid",
+      element: <EventDetailPage />,
     },
     {
       path: "/profile/:id",

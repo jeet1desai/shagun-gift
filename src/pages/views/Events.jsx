@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { Grid, Typography, useTheme } from "@mui/material";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 
 import { StyledContainer, StyledEmptyBox, StyledEventList, StyledHeading, StyledHeadingBox } from "./StyledView";
@@ -19,6 +19,7 @@ import { eventsListService } from "../../service/events";
 const Events = () => {
   const theme = useTheme();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { loading, events } = useSelector((state) => state.event);
 
@@ -39,7 +40,15 @@ const Events = () => {
             <RiShiningFill size={theme.icon.size.xs} color={theme.palette.text.primary} />
             <Typography variant="h4">{events.length}</Typography>
           </StyledHeading>
-          {events.length !== 0 && <Button title="Create a New Event" variant="primary" state="Filled" Icon={RiAddFill} />}
+          {events.length !== 0 && (
+            <Button
+              onClick={() => navigate(`/events/${id}/event/create`)}
+              title="Create a New Event"
+              variant="primary"
+              state="Filled"
+              Icon={RiAddFill}
+            />
+          )}
         </StyledHeadingBox>
 
         {events.length === 0 && (
@@ -57,8 +66,8 @@ const Events = () => {
           <Grid container spacing={4}>
             {events.map((event) => {
               return (
-                <Grid item xs={4}>
-                  <Card className="event-card" padding={12}>
+                <Grid item xs={4} key={event._id}>
+                  <Card className="event-card" padding={12} onClick={() => navigate(`/events/${id}/event/${event._id}`)}>
                     <Typography variant="h6">
                       <span>Name:</span> {event.name}
                     </Typography>

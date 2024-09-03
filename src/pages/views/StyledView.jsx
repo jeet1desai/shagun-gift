@@ -35,6 +35,9 @@ export const StyledEventList = styled(Box)(({ theme }) => ({
       fontWeight: "bold",
     },
   },
+  "& a": {
+    textDecoration: "none",
+  },
 }));
 
 export const StyledEmptyBox = styled(Box)(({ theme }) => ({
@@ -65,4 +68,8 @@ export const StyledEmptyBox = styled(Box)(({ theme }) => ({
       color: theme.palette.placeHolder,
     },
   },
+}));
+
+export const StyledEventBtn = styled(Box)(() => ({
+  float: "right",
 }));

@@ -1,23 +1,19 @@
 import React from "react";
 
-import { Box, Grid, styled, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import { StyledContainer, StyledHeadingBox } from "./StyledView";
+import { StyledContainer, StyledEventBtn, StyledHeadingBox } from "./StyledView";
 
 import Button from "../../components/ui/Button";
 import Card from "../../components/Card";
+import Loader from "../../components/Loader";
 import TextInput from "../../components/ui/TextInput";
 
 import { dispatch, useSelector } from "../../store";
 import { createEventService } from "../../service/events";
-import Loader from "../../components/Loader";
-
-const StyledEventBtn = styled(Box)(() => ({
-  float: "right",
-}));
 
 const EventForm = () => {
   const { id } = useParams();
