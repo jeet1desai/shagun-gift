@@ -1,4 +1,4 @@
-import { createEventSuccess, eventListSuccess, findUserSuccess, loadingSuccess } from "../store/slices/event";
+import { createEventSuccess, eventListSuccess, findUserSuccess, getEventSuccess, loadingSuccess } from "../store/slices/event";
 import { dispatch } from "../store";
 import axiosServices from "../utils/axios";
 
@@ -19,7 +19,7 @@ export const eventsDetailService = (id) => {
     try {
       dispatch(loadingSuccess({ loading: true }));
       const response = await axiosServices.get(`/event/${id}`);
-      dispatch(createEventSuccess({ event: response.data.event }));
+      dispatch(getEventSuccess({ event: response.data.event }));
     } catch (error) {
       dispatch(loadingSuccess({ loading: false }));
     }
@@ -55,7 +55,19 @@ export const createGuestService = (id, body) => {
     try {
       dispatch(loadingSuccess({ loading: true }));
       const response = await axiosServices.post(`/guest/event/${id}`, body);
-      dispatch(createEventSuccess({ event: response.data.event }));
+      dispatch(getEventSuccess({ event: response.data.event }));
+    } catch (error) {
+      dispatch(loadingSuccess({ loading: false }));
+    }
+  };
+};
+
+export const changeStatusService = (id, body) => {
+  return async () => {
+    try {
+      dispatch(loadingSuccess({ loading: true }));
+      await axiosServices.put(`/status/event/${id}`, body);
+      dispatch(loadingSuccess({ loading: false}));
     } catch (error) {
       dispatch(loadingSuccess({ loading: false }));
     }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Typography, useTheme } from "@mui/material";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
@@ -9,12 +9,13 @@ import * as Yup from "yup";
 import Card from "../../components/Card";
 import Button from "../../components/ui/Button";
 import Loader from "../../components/Loader";
+import TextInput from "../../components/ui/TextInput";
 
 import { RiAddFill, RiCloseLine } from "react-icons/ri";
 
 import { dispatch, useSelector } from "../../store";
-import { eventsDetailService, findUserService } from "../../service/events";
-import TextInput from "../../components/ui/TextInput";
+import { findUserSuccess } from "../../store/slices/event";
+import { changeStatusService, createGuestService, eventsDetailService, findUserService } from "../../service/events";
 
 const EventDetail = () => {
   const { id, eid } = useParams();
@@ -75,17 +76,67 @@ const EventDetail = () => {
                     <span>Venue:</span> {event?.venue}
                   </Typography>
                 </Grid>
-                {event?.guests &&
-                  event.guests.map((guest) => {
-                    return (
-                      <Card className="event-card" padding={10}>
-                        q
-                      </Card>
-                    );
-                  })}
-
                 <Grid item xs={12}>
-                  <Button onClick={() => setAddGuest(true)} title="Add Guest" Icon={RiAddFill} variant="neutral" state="Stroke" />
+                  <Grid container spacing={4}>
+                    {event?.guests &&
+                      event.guests.map((guest) => {
+                        return (
+                          <Grid item xs={6}>
+                            <Card className="event-card" padding={10}>
+                              <Grid container spacing={4}>
+                                <Grid item xs={6}>
+                                  <Typography variant="h6">
+                                    <span>Name:</span> {guest.name}
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography variant="h6">
+                                    <span>Phone:</span> {guest.phone}
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography variant="h6">
+                                    <span>Email:</span> {guest.email}
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography variant="h6">
+                                    <span>City:</span> {guest.city}
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography variant="h6">
+                                    <span>Amount:</span> {guest.contributionAmount}
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Typography variant="h6">
+                                    <span>Is Paid:</span> {guest.paymentStatus}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                            </Card>
+                          </Grid>
+                        );
+                      })}
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    {event?.status === "Open" && (
+                      <Button onClick={() => setAddGuest(true)} title="Add Guest" Icon={RiAddFill} variant="neutral" state="Stroke" />
+                    )}
+                    <Button
+                      onClick={() =>
+                        dispatch(changeStatusService(eid, { status: event?.status === "Open" ? "Closed" : "Open" })).then(() =>
+                          dispatch(eventsDetailService(eid))
+                        )
+                      }
+                      title={event?.status === "Open" ? "Close Event" : "Open Event"}
+                      variant="primary"
+                      state="Filled"
+                    />
+                  </Box>
                 </Grid>
               </Grid>
             </Card>
@@ -101,7 +152,15 @@ const EventDetail = () => {
               name: Yup.string().max(255).required("Please enter name!"),
               city: Yup.string().max(255).required("Please enter city!"),
             })}
-            onSubmit={(values) => {}}
+            onSubmit={(values, { resetForm }) => {
+              setAddGuest(false);
+              dispatch(createGuestService(eid, values)).then(() => {
+                dispatch(findUserSuccess({ guest: null }));
+                dispatch(eventsDetailService(eid));
+                resetForm();
+              });
+            }}
+            enableReinitialize
           >
             {({ values, errors, handleSubmit, touched, getFieldProps, handleBlur }) => (
               <Form noValidate onSubmit={handleSubmit}>

@@ -27,6 +27,11 @@ const eventSlice = createSlice({
       state.guest = guest;
       state.loading = false;
     },
+    getEventSuccess(state, action) {
+      const { event } = action.payload;
+      state.event = event;
+      state.loading = false;
+    },
     loadingSuccess(state, action) {
       const { loading } = action.payload;
       state.loading = loading;
@@ -34,6 +39,6 @@ const eventSlice = createSlice({
   },
 });
 
-export const { createEventSuccess, eventListSuccess, loadingSuccess, findUserSuccess } = eventSlice.actions;
+export const { createEventSuccess, eventListSuccess, loadingSuccess, findUserSuccess, getEventSuccess } = eventSlice.actions;
 
 export default eventSlice.reducer;
