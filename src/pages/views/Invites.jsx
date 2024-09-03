@@ -57,7 +57,7 @@ const Invites = () => {
           <Grid container spacing={4}>
             {invites.map((item, index) => {
               return (
-                <Grid item xs={4} key={index}>
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                   <Card className="event-card" padding={12}>
                     <Typography variant="h6">
                       <span>Name:</span> {item.event.name}

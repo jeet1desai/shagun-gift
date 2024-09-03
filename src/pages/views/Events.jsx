@@ -66,7 +66,7 @@ const Events = () => {
           <Grid container spacing={4}>
             {events.map((event) => {
               return (
-                <Grid item xs={4} key={event._id}>
+                <Grid item xs={12} sm={6} md={4} lg={3} key={event._id}>
                   <Card className="event-card" padding={12} onClick={() => navigate(`/events/${id}/event/${event._id}`)}>
                     <Typography variant="h6">
                       <span>Name:</span> {event.name}

@@ -51,22 +51,22 @@ const EventDetail = () => {
           <Grid item xs={12}>
             <Card className="event-card" padding={20}>
               <Grid container spacing={4}>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <Typography variant="h6">
                     <span>Host:</span> {event?.host?.name} {event?.host?._id === id && "(You)"}
                   </Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <Typography variant="h6">
                     <span>Date:</span> {moment(event?.date).format("MMM DD, YYYY")}
                   </Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <Typography variant="h6">
                     <span>No of Guest:</span> {event?.guests?.length}
                   </Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <Typography variant="h6">
                     <span>Total Received Amount:</span> {event?.totalReceivedAmount}
                   </Typography>
@@ -81,35 +81,35 @@ const EventDetail = () => {
                     {event?.guests &&
                       event.guests.map((guest) => {
                         return (
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6}>
                             <Card className="event-card" padding={10}>
                               <Grid container spacing={4}>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} md={6}>
                                   <Typography variant="h6">
                                     <span>Name:</span> {guest.name}
                                   </Typography>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} md={6}>
                                   <Typography variant="h6">
                                     <span>Phone:</span> {guest.phone}
                                   </Typography>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} md={6}>
                                   <Typography variant="h6">
                                     <span>Email:</span> {guest.email}
                                   </Typography>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} md={6}>
                                   <Typography variant="h6">
                                     <span>City:</span> {guest.city}
                                   </Typography>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} md={6}>
                                   <Typography variant="h6">
                                     <span>Amount:</span> {guest.contributionAmount}
                                   </Typography>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} md={6}>
                                   <Typography variant="h6">
                                     <span>Is Paid:</span> {guest.paymentStatus}
                                   </Typography>

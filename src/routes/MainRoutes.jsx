@@ -2,6 +2,7 @@ import { lazy } from "react";
 
 import Loadable from "../components/Loadable";
 import MainLayout from "../layouts/MainLayout";
+import AuthGuard from "../layouts/RouteGuard/AuthGuard";
 
 const DashboardPage = Loadable(lazy(() => import("../pages/views/Dashboard")));
 const EventsPage = Loadable(lazy(() => import("../pages/views/Events")));
@@ -11,7 +12,11 @@ const ProfilePage = Loadable(lazy(() => import("../pages/views/Profile")));
 const InvitesPage = Loadable(lazy(() => import("../pages/views/Invites")));
 
 const MainRoutes = {
-  element: <MainLayout />,
+  element: (
+    <AuthGuard>
+      <MainLayout />
+    </AuthGuard>
+  ),
   children: [
     {
       path: "/dashboard/:id",
