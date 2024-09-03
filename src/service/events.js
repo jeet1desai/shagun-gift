@@ -1,4 +1,4 @@
-import { createEventSuccess, eventListSuccess, findUserSuccess, getEventSuccess, loadingSuccess } from "../store/slices/event";
+import { createEventSuccess, eventListSuccess, findUserSuccess, getEventSuccess, invitesListSuccess, loadingSuccess } from "../store/slices/event";
 import { dispatch } from "../store";
 import axiosServices from "../utils/axios";
 
@@ -67,7 +67,31 @@ export const changeStatusService = (id, body) => {
     try {
       dispatch(loadingSuccess({ loading: true }));
       await axiosServices.put(`/status/event/${id}`, body);
-      dispatch(loadingSuccess({ loading: false}));
+      dispatch(loadingSuccess({ loading: false }));
+    } catch (error) {
+      dispatch(loadingSuccess({ loading: false }));
+    }
+  };
+};
+
+export const getInvitesService = (id) => {
+  return async () => {
+    try {
+      dispatch(loadingSuccess({ loading: true }));
+      const response = await axiosServices.get(`/invite/event/${id}`);
+      dispatch(invitesListSuccess({ invites: response.data.invites }));
+    } catch (error) {
+      dispatch(loadingSuccess({ loading: false }));
+    }
+  };
+};
+
+export const addContributionService = (body) => {
+  return async () => {
+    try {
+      dispatch(loadingSuccess({ loading: true }));
+      await axiosServices.post(`/contribute/event`, body);
+      dispatch(loadingSuccess({ loading: false }));
     } catch (error) {
       dispatch(loadingSuccess({ loading: false }));
     }

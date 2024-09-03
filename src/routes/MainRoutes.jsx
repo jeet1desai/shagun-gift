@@ -8,6 +8,7 @@ const EventsPage = Loadable(lazy(() => import("../pages/views/Events")));
 const EventFormPage = Loadable(lazy(() => import("../pages/views/EventForm")));
 const EventDetailPage = Loadable(lazy(() => import("../pages/views/EventDetail")));
 const ProfilePage = Loadable(lazy(() => import("../pages/views/Profile")));
+const InvitesPage = Loadable(lazy(() => import("../pages/views/Invites")));
 
 const MainRoutes = {
   element: <MainLayout />,
@@ -19,6 +20,10 @@ const MainRoutes = {
     {
       path: "/events/:id",
       element: <EventsPage />,
+    },
+    {
+      path: "/invites/:id",
+      element: <InvitesPage />,
     },
     {
       path: "/events/:id/event/create",

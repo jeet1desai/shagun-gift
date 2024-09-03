@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   event: null,
   events: [],
+  invites: [],
   guest: null,
 };
 
@@ -20,6 +21,11 @@ const eventSlice = createSlice({
     eventListSuccess(state, action) {
       const { events } = action.payload;
       state.events = events;
+      state.loading = false;
+    },
+    invitesListSuccess(state, action) {
+      const { invites } = action.payload;
+      state.invites = invites;
       state.loading = false;
     },
     findUserSuccess(state, action) {
@@ -39,6 +45,6 @@ const eventSlice = createSlice({
   },
 });
 
-export const { createEventSuccess, eventListSuccess, loadingSuccess, findUserSuccess, getEventSuccess } = eventSlice.actions;
+export const { invitesListSuccess, createEventSuccess, eventListSuccess, loadingSuccess, findUserSuccess, getEventSuccess } = eventSlice.actions;
 
 export default eventSlice.reducer;

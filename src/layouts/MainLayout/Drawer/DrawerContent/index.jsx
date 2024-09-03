@@ -33,6 +33,13 @@ const DrawerContent = () => {
       url: `events/${id}`,
       icon: null,
     },
+    {
+      id: "invites",
+      title: "Invites",
+      type: "item",
+      url: `invites/${id}`,
+      icon: null,
+    },
   ].map((item) => {
     return <NavItem key={item.id} item={item} />;
   });
