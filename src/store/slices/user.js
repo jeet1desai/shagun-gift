@@ -4,7 +4,7 @@ import { cookieStorage } from "../../utils/cookie";
 const initialState = {
   loading: false,
   isLoggedIn: false,
-  user: null || JSON.parse(cookieStorage.getItem("user")),
+  user: null,
 };
 
 const userSlice = createSlice({
