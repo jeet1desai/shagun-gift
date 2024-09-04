@@ -8,8 +8,6 @@ const AuthGuard = ({ children }) => {
   const navigate = useNavigate();
   const user = cookieStorage.getItem("user");
 
-  console.log(user);
-  
   useEffect(() => {
     if (!user) {
       navigate("/login");

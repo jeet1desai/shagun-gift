@@ -1,5 +1,5 @@
 import { dispatch } from "../store";
-import { loadingSuccess } from "../store/slices/dashboard";
+import { contributionSuccess, loadingSuccess, receivedGiftSuccess, topGuestHostSuccess } from "../store/slices/dashboard";
 import axiosServices from "../utils/axios";
 
 export const receivedGiftService = (id) => {
@@ -7,9 +7,7 @@ export const receivedGiftService = (id) => {
     try {
       dispatch(loadingSuccess({ loading: true }));
       const response = await axiosServices.get(`/gift/received/${id}`);
-      console.log(response);
-
-      // dispatch(invitesListSuccess({ invites: response.data.invites }));
+      dispatch(receivedGiftSuccess({ gifts: response.data.gifts }));
     } catch (error) {
       dispatch(loadingSuccess({ loading: false }));
     }
@@ -21,9 +19,8 @@ export const topGuestHostService = (id) => {
     try {
       dispatch(loadingSuccess({ loading: true }));
       const response = await axiosServices.get(`/host/guest/${id}`);
-      console.log(response);
-
-      // dispatch(invitesListSuccess({ invites: response.data.invites }));
+      dispatch(topGuestHostSuccess({ guests: response.data.guests
+ }));
     } catch (error) {
       dispatch(loadingSuccess({ loading: false }));
     }
@@ -35,9 +32,7 @@ export const contributionGiftService = (id) => {
     try {
       dispatch(loadingSuccess({ loading: true }));
       const response = await axiosServices.get(`/contribution/gift/${id}`);
-      console.log(response);
-
-      // dispatch(invitesListSuccess({ invites: response.data.invites }));
+      dispatch(contributionSuccess({ contribution: response.data.contribution }));
     } catch (error) {
       dispatch(loadingSuccess({ loading: false }));
     }
